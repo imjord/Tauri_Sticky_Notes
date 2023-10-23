@@ -1,0 +1,65 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: gray;
+}
+
+.menu-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+}
+
+.menu-right {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 18%;
+}
+
+.add-note-plus div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 6px;
+
+}
+
+.add-note-plus div:hover {
+    background-color: rgb(85, 84, 84);
+}
+
+#plus-icon {
+    font-size: 18px;
+    color: gray;
+}
+.menu-right div:nth-child(1) {
+    height: 100%;
+    padding: 6px;
+}
+
+
+
+.menu-right div:nth-child(1):hover {
+    background-color: rgb(85, 84, 84);
+}
+
+
+.menu-right div:nth-child(2) {
+    height: 100%;
+    padding: 6px;
+}
+
+.menu-right div:nth-child(2):hover {
+    background-color: rgb(85, 84, 84);
+
+}
