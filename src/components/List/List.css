@@ -1,30 +1,23 @@
 .list {
-    border-top: white 2px solid;
-    background-color: gray;
+   
     margin-top: 10px;
 }
 
-.card {
+.no-notes {
+   
     display: flex;
-    width: 100%;
+    justify-content: center;
     flex-direction: column;
-}
-
-.card-time {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-.card-time p {
-    padding-right: 10px;
-    font-size: 12px;
-}
-
-.card-content {
-    display: flex;
-    justify-content: flex-start;
     align-items: center;
-    padding-left: 30px;
-    font-size: 14px;
+    margin-top: 50px;
+    background-color: rgb(33, 32, 32);
+}
+
+.no-notes-p {
+    color: gray;
+    font-size: 13px;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

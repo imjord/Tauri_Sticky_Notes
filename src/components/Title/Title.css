@@ -1,5 +1,6 @@
 .title {
     display: flex;
-    color: gray;
+    color: white;
+    font-size: 20px;
     width: 100%;
 }

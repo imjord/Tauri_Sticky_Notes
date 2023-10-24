@@ -7,8 +7,8 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "tauri_sticky_notes",
-    "version": "0.0.0"
+    "productName": "Tauri Sticky Notes",
+    "version": "0.1.0"
   },
   "tauri": {
     "allowlist": {
@@ -18,7 +18,8 @@
         "open": true
       },
       "window": {
-        "all": false,
+        "all": true, 
+        "create": true, 
         "close": true,
         "hide": true,
         "show": true,
@@ -32,7 +33,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "com.github.imjord",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -48,7 +49,7 @@
       {
         "fullscreen": false,
         "resizable": false,
-        "title": "tauri_sticky_notes",
+        "title": "Tauri Sticky Notes",
         "width": 320,
         "height": 600,
         "decorations": false

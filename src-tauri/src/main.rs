@@ -13,6 +13,11 @@ fn greet(name: &str) -> String {
 }
 
 
+// #[tauri::command]
+// fn get_windows(window: tauri::Window) ->String  {
+//     format!("Window {}", window.label())
+// }
+
 
 fn main() {
     tauri::Builder::default()

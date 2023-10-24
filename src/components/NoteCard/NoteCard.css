@@ -1,0 +1,26 @@
+
+.card {
+    display: flex;
+    width: 100%;
+    border-top: white 2px solid;
+    flex-direction: column;
+}
+
+.card-time {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.card-time p {
+    padding-right: 10px;
+    font-size: 12px;
+}
+
+.card-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 30px;
+    font-size: 14px;
+}
