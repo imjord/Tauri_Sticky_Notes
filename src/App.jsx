@@ -9,15 +9,19 @@ import Title from "./components/Title/Title";
 import Search from "./components/Search/Search";
 import List from "./components/List/List";
 import {Routes, Route} from "react-router-dom";
+
 // pages
 import Note from "./pages/Note";
 import Home from "./pages/Home";
 function App() {
  
   
- 
+
  
 
+  useEffect(() => {
+  
+  })
   return (
     <div className="app">
       <Menu  />
