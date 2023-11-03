@@ -5,33 +5,47 @@ import { faXmark, faPlus,faGear, faEllipsis  } from '@fortawesome/free-solid-svg
 import { appWindow, getCurrent, WebviewWindow } from "@tauri-apps/api/window";
 import { useNoteContext } from '../../NoteContext';
 
-const NoteMenu = () => {
-    const { noteId, setNoteId } = useNoteContext();
+const NoteMenu = (props) => {
+  const {myId, newNote} = props;
 
-
-    const createWindow = async () => {
-      setNoteId(prevNoteId => prevNoteId + 1);
-  
-      const addNoteView = new WebviewWindow(`note${noteId}`, {
-        url: `/note/${noteId}`,
-        height: 250,
-        width: 310,
-        decorations: false,
-        fullscreen: false,
-        resizable: false,
-        title: "Tauri Sticky Notes",
-        titleBarStyle: "transparent",
-        hiddenTitle: true,
-      });
+  const createWindow =  () => {
+    try{
       
-      addNoteView.once("tauri://created", function () {
-        console.log(getCurrent().label);
-      });
-      addNoteView.once("tauri://error", function (e) {
-        console.log(e);
-      });
+      
+      newNote();
+
+      console.log(myId);
+
+      if(myId){
+        const addNoteView =  new WebviewWindow(`${myId}`, {
+          url: `/note/${myId}`,
+          height: 250,
+          width: 310,
+          decorations: false,
+          fullscreen: false,
+          resizable: false,
+          title: "Tauri Sticky Notes",
+          titleBarStyle: "transparent",
+          hiddenTitle: true,
+        });
+        
+        addNoteView.once("tauri://created", function () {
+          console.log(getCurrent().label);
+        });
+        addNoteView.once("tauri://error", function (e) {
+          console.log(e);
+        });
+      } else {
+        console.log("idk why the hell myId is empty at times but then it gets filled with an id....")
+      }
     
-      };
+    
+      }
+       catch (err){
+      console.log(err)
+    }
+    };
+     
     
     return (
       <div  className='note-menu'>

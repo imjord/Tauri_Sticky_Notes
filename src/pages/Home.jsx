@@ -5,14 +5,14 @@ import Search from "../components/Search/Search";
 import List from "../components/List/List";
 
 const Home = (props) => {
-  const {notes, loading} = props;
+  const {notes, myId, addNote, loading, noNotes, newNote} = props;
   return (
    <div>
-    <Menu />
+    <Menu  myId={myId} addNote={addNote} newNote={newNote} />
  <main>
     <Title />
     <Search />
-    <List   notes={notes} loading={loading} />
+    <List   noNotes={noNotes} notes={notes} loading={loading} />
     </main>
    </div>
    

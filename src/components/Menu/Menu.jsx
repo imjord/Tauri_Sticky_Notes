@@ -6,35 +6,43 @@ import { useNoteContext } from '../../NoteContext';
 
 import Note from '../../pages/Note';
 import "./Menu.css";
-const Menu = () => {
-  const { noteId, setNoteId } = useNoteContext();
+const Menu = (props) => {
 
-
-
+  const {addNote, newNote, myId} = props;
 
   const createWindow = async () => {
-    setNoteId(prevNoteId => prevNoteId + 1);
-
-    const addNoteView = new WebviewWindow(`note${noteId}`, {
-      url: `/note/${noteId}`,
-      height: 250,
-      width: 310,
-      decorations: false,
-      fullscreen: false,
-      resizable: false,
-      title: "Tauri Sticky Notes",
-      titleBarStyle: "transparent",
-      hiddenTitle: true,
-    });
+    try {
+      await newNote(); // Wait for newNote to complete
+      setTimeout(()=> {
+        if (myId) {
+          // The myId is available, so you can proceed to create the window
+          const addNoteView = new WebviewWindow(`${myId}`, {
+            url: `/note/${myId}`,
+            height: 250,
+            width: 310,
+            decorations: false,
+            fullscreen: false,
+            resizable: false,
+            title: "Tauri Sticky Notes",
+            titleBarStyle: "transparent",
+            hiddenTitle: true,
+          });
     
-    addNoteView.once("tauri://created", function () {
-      console.log(getCurrent().label);
-    });
-    addNoteView.once("tauri://error", function (e) {
-      console.log(e);
-    });
-  
-    };
+          addNoteView.once("tauri://created", function () {
+            console.log(getCurrent().label);
+          });
+          addNoteView.once("tauri://error", function (e) {
+            console.log(e);
+          });
+        } else {
+          console.log("myId is empty. It might take some time to load.");
+        }
+      }, 2000)
+    
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
   return (
     <div  className='menu'>

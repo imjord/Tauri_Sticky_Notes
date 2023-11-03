@@ -7,19 +7,20 @@ import NoteMenu from '../components/NoteMenu/NoteMenu';
 import NoteFooterMenu from '../components/NoteFooterMenu/NoteFooterMenu';
 
 const Note = (props) => {
-  const {setNoteContent, noteContent, addNote} = props;
-  const {noteId, setNoteId} = useNoteContext();
+  const {noteId, note, setNote, setNoteId} = useNoteContext();
+  const {myId, newNote} = props;
+
+  localStorage.setItem("note", note);
   
-  console.log(noteContent);
 
   useEffect(() => {
-    setNoteId(getCurrent().label);
+ 
     console.log(getCurrent().label);
   },[]);
 
   return (
     <div>
-      <NoteMenu />
+      <NoteMenu myId={myId} newNote={newNote}/>
           <div className='note-div'>
       <div className='note-text-box'>
         <div className='note-input'>
@@ -27,11 +28,11 @@ const Note = (props) => {
           spellcheck='false'
 
          placeholder='Take a note...'
-         onChange={(e) => setNoteContent(e.target.value)}
+         onChange={(e) => setNote(e.target.value)}
       /></div>
       </div>
     </div>
-    <NoteFooterMenu addNote={addNote} />
+    <NoteFooterMenu  />
     </div>
 
   )

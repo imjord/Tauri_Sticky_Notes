@@ -2,8 +2,7 @@ import React from 'react'
 import "./NoteFooterMenu.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faBold , faItalic, faUnderline, faStrikethrough, faList, faImage, faCheck } from '@fortawesome/free-solid-svg-icons'
-const NoteFooterMenu = (props) => {
-  const {addNote} = props;
+const NoteFooterMenu = () => {
 
   return (
     <footer>
@@ -26,9 +25,7 @@ const NoteFooterMenu = (props) => {
       <div>
       <FontAwesomeIcon icon={faImage} />
       </div>
-      <div>
-      <FontAwesomeIcon icon={faCheck} onClick={addNote} />
-      </div>
+    
       </div>
       </footer>
   )

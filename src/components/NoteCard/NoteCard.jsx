@@ -3,7 +3,6 @@ import "./NoteCard.css";
 import spinner from "../../assets/spinner.gif";
 const NoteCard = (props) => {
   const {notes, loading} = props;
-  console.log(notes)
 
 
 

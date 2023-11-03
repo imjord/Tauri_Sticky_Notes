@@ -3,10 +3,10 @@ import React, { createContext, useContext, useState } from 'react';
 const NoteContext = createContext();
 
 export function NoteProvider({ children }) {
-  const [noteId, setNoteId] = useState(0);
+  const [note, setNote] = useState("");
 
   return (
-    <NoteContext.Provider value={{ noteId, setNoteId }}>
+    <NoteContext.Provider value={{ note, setNote}}>
       {children}
     </NoteContext.Provider>
   );

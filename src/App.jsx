@@ -19,8 +19,9 @@ import axios from "axios";
 function App() {
   const [notes, setNotes] = useState([{}]);
   const [loading, setLoading] = useState(false);
-  const [noteContent, setNoteContent] = useState("");
-  
+  const [noNotes , setNoNotes] = useState(false);
+  const [myId, setMyId] = useState(null); 
+
   const getNotes = async () => {
     try {
       setLoading(true);
@@ -29,8 +30,31 @@ function App() {
       setLoading(false);
     } catch (err) {
       console.log(err);
+      if(err.response.data === "no notes found"){
+        setNoNotes(true);
+        setLoading(false);
+      }
     }
   }
+
+
+  const newNote = () => {
+    const data = qs.stringify({
+      content: "",
+    });
+  
+    return axios.post("http://localhost:8080/notes", data, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+      .then((response) => {
+        setMyId(response?.data?._id?.$oid);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const addNote = async () =>  {
     try {
@@ -43,8 +67,8 @@ function App() {
         },
       });
 
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   }
   
@@ -58,8 +82,8 @@ function App() {
     <div className="app">
    
     <Routes>
-      <Route path="/" element={<Home notes={notes} loading={loading}/>}/>
-      <Route path="/note/:id" element={<Note addNote={addNote} setNoteContent={setNoteContent} noteContent={noteContent}  />}/>
+      <Route path="/" element={<Home myId={myId} addNote={addNote} newNote={newNote} noNotes={noNotes} notes={notes} loading={loading}/>}/>
+      <Route path="/note/:id" element={<Note myId={myId} newNote={newNote}   />}/>
     </Routes>
     </div>
   );
