@@ -1,5 +1,28 @@
 
 
+
 .note-input {
-    margin-top: 40px;
+    display: flex;
+    flex-direction: column; /* Set the flex direction to column */
+    height: 90vh; /* Set the height to 100% of the viewport height */
+    justify-content: flex-start; /* Align items to the top */
+    
+}
+ 
+.note-input textarea {
+    color: rgb(209, 208, 208);
+    background-color: rgb(33, 32, 32);
+    border: none;
+    text-align: start;
+    outline: none;
+    flex-grow: 1;
+    width: 100%;
+    white-space: pre-wrap; /* Allow text to wrap to the next line */
+    overflow-wrap: break-word; /* Break long words when necessary */
+    resize: none;
+    margin-top: 30px;
+}
+
+textarea::placeholder {
+    color: rgb(209, 208, 208);
 }

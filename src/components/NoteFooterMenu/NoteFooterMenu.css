@@ -1,0 +1,20 @@
+footer {
+ 
+    position: fixed;
+    padding: 7px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    border-top: 1px solid rgb(111, 111, 111);
+}
+
+.footer-wrapper {
+    display: flex;
+    height: 100%;
+    width: 80%;
+    color: rgb(111, 111, 111);
+    padding: 5px;
+    justify-content: space-between;
+}

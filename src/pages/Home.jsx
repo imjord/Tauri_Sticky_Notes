@@ -4,15 +4,18 @@ import Title from "../components/Title/Title";
 import Search from "../components/Search/Search";
 import List from "../components/List/List";
 
-const Home = () => {
-
+const Home = (props) => {
+  const {notes, loading} = props;
   return (
-   
-    <main>
+   <div>
+    <Menu />
+ <main>
     <Title />
     <Search />
-    <List   />
+    <List   notes={notes} loading={loading} />
     </main>
+   </div>
+   
   )
 }
 

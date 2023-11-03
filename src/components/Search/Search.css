@@ -20,7 +20,7 @@
 .search input {
     width: 100%;
     padding: 7px;
-    background-color: rgb(75, 71, 71);
+    background-color: rgb(61, 60, 60);
     border: 0;
     outline: 0;
     color: rgb(183, 181, 181);
@@ -34,7 +34,7 @@
 #search {
    position: relative;
     padding: 7px;
-    background-color: rgb(75, 71, 71);
+    background-color: rgb(61, 60, 60);
     color: rgb(183, 181, 181);
     
 }
@@ -47,5 +47,5 @@
 }
 
 #search:hover {
-    background-color: white;
+    background-color: rgb(84, 84, 84);
 }
