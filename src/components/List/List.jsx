@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import "./List.css";
 import NoteCard from '../NoteCard/NoteCard';
 import noteImage from "../../assets/notes_plac.png";
+
 import { useNoteContext } from '../../NoteContext';
 const List = (props) => {
 
-  const {noteId, note, setNote, setNoteId} = useNoteContext();
+  const {noteId,  note, setNote, setNoteId} = useNoteContext();
 
-  const {notes, noNotes, loading} = props;
+  const {notes, deleteNote, noNotes, loading} = props;
 
 
 
@@ -22,7 +23,7 @@ const List = (props) => {
             <p>Tap the new note button above to create a note</p>
             </div>
           </div> 
-        :   <NoteCard notes={notes} loading={loading} />
+        :   <NoteCard deleteNote={deleteNote} notes={notes} loading={loading} />
   }
     </div>
   )

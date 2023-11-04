@@ -6,12 +6,11 @@ import { appWindow, getCurrent, WebviewWindow } from "@tauri-apps/api/window";
 import { useNoteContext } from '../../NoteContext';
 
 const NoteMenu = (props) => {
-  const {  noteId, newNote} = props;
+  const { getNotes, noteId, newNote} = props;
 
   const createWindow = async () => {
     try {
       const noteId = await newNote();
-  
       if (noteId) {
         const View = new WebviewWindow(`${noteId}`, {
           url: `/note/${noteId}`,
@@ -24,9 +23,9 @@ const NoteMenu = (props) => {
           titleBarStyle: "transparent",
           hiddenTitle: true,
         });
-  
         View.once("tauri://created", function () {
-          console.log(getCurrent().label);
+          console.log('ghergjvaePOOP')
+          getNotes();
         });
         View.once("tauri://error", function (e) {
           console.log(e);
@@ -54,8 +53,8 @@ const NoteMenu = (props) => {
               <FontAwesomeIcon id='setting-icon' icon={faEllipsis} />
   
               </div>
-              <div title='Close window'>
-              <FontAwesomeIcon id='close' icon={faXmark} onClick={() => appWindow.close()} />
+              <div title='Close window' onClick={() => appWindow.close()}>
+              <FontAwesomeIcon id='close' icon={faXmark}  />
   
               </div>
           </div>

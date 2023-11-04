@@ -9,8 +9,8 @@
     margin-top: 8px;
     border-radius: 3px;
     background-color: rgb(61, 60, 60);
-
 }
+
 
 #loading {
     background-color: rgb(33, 32, 32);
@@ -39,4 +39,10 @@
     padding-left: 30px;
     font-size: 14px;
     color: white;
+}
+
+
+#delete {
+    font-size: 30px;
+    margin-right: 10px;
 }

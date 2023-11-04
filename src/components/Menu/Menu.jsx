@@ -8,12 +8,13 @@ import Note from '../../pages/Note';
 import "./Menu.css";
 const Menu = (props) => {
 
-  const { newNote, noteId} = props;
+  const { newNote,getNotes, noteId} = props;
 
   const createWindow = async () => {
     try {
+     
       const noteId = await newNote();
-  
+
       if (noteId) {
         const View = new WebviewWindow(`${noteId}`, {
           url: `/note/${noteId}`,
@@ -28,7 +29,7 @@ const Menu = (props) => {
         });
   
         View.once("tauri://created", function () {
-          console.log(getCurrent().label);
+          getNotes();
         });
         View.once("tauri://error", function (e) {
           console.log(e);

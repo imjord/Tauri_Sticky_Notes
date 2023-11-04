@@ -21,14 +21,14 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [noNotes , setNoNotes] = useState(false);
   const [  noteId, setNoteId] = useState(null); 
-  const [userAction, setUserAction] = useState(false);
 
   const getNotes = async () => {
-
+    
     try {
       setLoading(true);
       const response = await axios.get("http://localhost:8080/notes");
       setNotes(response.data);
+      console.log('WIHGWARHGAIWEUHGIAEHG')
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -76,19 +76,27 @@ function App() {
   // }
   
 
+  const deleteNote = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/notes/${id}`);
+      getNotes();
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
  
 
   useEffect(() => {
     getNotes();
-    console.log("rendered")
 
-  }, [userAction])
+  }, [])
   return (
     <div className="app">
    
     <Routes>
-      <Route path="/" element={<Home   noteId={  noteId}   newNote={newNote} noNotes={noNotes} notes={notes} loading={loading}/>}/>
-      <Route path="/note/:id" element={<Note    noteId={  noteId} newNote={newNote}   />}/>
+      <Route path="/" element={<Home deleteNote={deleteNote} getNotes={getNotes}   noteId={  noteId}   newNote={newNote} noNotes={noNotes} notes={notes} loading={loading}/>}/>
+      <Route path="/note/:id" element={<Note  getNotes={getNotes}   noteId={  noteId} newNote={newNote}   />}/>
     </Routes>
     </div>
   );
