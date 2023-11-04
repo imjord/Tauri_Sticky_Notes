@@ -20,9 +20,11 @@ function App() {
   const [notes, setNotes] = useState([{}]);
   const [loading, setLoading] = useState(false);
   const [noNotes , setNoNotes] = useState(false);
-  const [myId, setMyId] = useState(null); 
+  const [  noteId, setNoteId] = useState(null); 
+  const [userAction, setUserAction] = useState(false);
 
   const getNotes = async () => {
+
     try {
       setLoading(true);
       const response = await axios.get("http://localhost:8080/notes");
@@ -38,52 +40,55 @@ function App() {
   }
 
 
-  const newNote = () => {
-    const data = qs.stringify({
-      content: "",
-    });
-  
-    return axios.post("http://localhost:8080/notes", data, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    })
-      .then((response) => {
-        setMyId(response?.data?._id?.$oid);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const addNote = async () =>  {
+  const newNote = async () => {
     try {
       const data = qs.stringify({
-        content: noteContent,
+        content: "",
       });
       const response = await axios.post("http://localhost:8080/notes", data, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
-
+  
+      const newId = response?.data?._id?.$oid;
+      return newId; // Return the updated value
     } catch (err) {
       console.log(err);
+      throw err; // Re-throw the error
     }
   }
+
+  // const  addNote  = async () =>  {
+  //   try {
+  //     const data = qs.stringify({
+  //       content: noteContent,
+  //     });
+  //     const response = await axios.post("http://localhost:8080/notes", data, {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //       },
+  //     });
+
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
   
 
  
 
   useEffect(() => {
     getNotes();
-  }, [])
+    console.log("rendered")
+
+  }, [userAction])
   return (
     <div className="app">
    
     <Routes>
-      <Route path="/" element={<Home myId={myId} addNote={addNote} newNote={newNote} noNotes={noNotes} notes={notes} loading={loading}/>}/>
-      <Route path="/note/:id" element={<Note myId={myId} newNote={newNote}   />}/>
+      <Route path="/" element={<Home   noteId={  noteId}   newNote={newNote} noNotes={noNotes} notes={notes} loading={loading}/>}/>
+      <Route path="/note/:id" element={<Note    noteId={  noteId} newNote={newNote}   />}/>
     </Routes>
     </div>
   );

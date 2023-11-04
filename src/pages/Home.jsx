@@ -5,10 +5,10 @@ import Search from "../components/Search/Search";
 import List from "../components/List/List";
 
 const Home = (props) => {
-  const {notes, myId, addNote, loading, noNotes, newNote} = props;
+  const {notes,   noteId, loading, noNotes, newNote} = props;
   return (
    <div>
-    <Menu  myId={myId} addNote={addNote} newNote={newNote} />
+    <Menu    noteId={  noteId}   newNote={newNote} />
  <main>
     <Title />
     <Search />

@@ -6,19 +6,15 @@ import { appWindow, getCurrent, WebviewWindow } from "@tauri-apps/api/window";
 import { useNoteContext } from '../../NoteContext';
 
 const NoteMenu = (props) => {
-  const {myId, newNote} = props;
+  const {  noteId, newNote} = props;
 
-  const createWindow =  () => {
-    try{
-      
-      
-      newNote();
-
-      console.log(myId);
-
-      if(myId){
-        const addNoteView =  new WebviewWindow(`${myId}`, {
-          url: `/note/${myId}`,
+  const createWindow = async () => {
+    try {
+      const noteId = await newNote();
+  
+      if (noteId) {
+        const View = new WebviewWindow(`${noteId}`, {
+          url: `/note/${noteId}`,
           height: 250,
           width: 310,
           decorations: false,
@@ -28,23 +24,20 @@ const NoteMenu = (props) => {
           titleBarStyle: "transparent",
           hiddenTitle: true,
         });
-        
-        addNoteView.once("tauri://created", function () {
+  
+        View.once("tauri://created", function () {
           console.log(getCurrent().label);
         });
-        addNoteView.once("tauri://error", function (e) {
+        View.once("tauri://error", function (e) {
           console.log(e);
         });
       } else {
-        console.log("idk why the hell myId is empty at times but then it gets filled with an id....")
+        console.log("Note ID is empty.");
       }
-    
-    
-      }
-       catch (err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-    };
+  };
      
     
     return (

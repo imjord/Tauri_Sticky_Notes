@@ -7,8 +7,8 @@ import NoteMenu from '../components/NoteMenu/NoteMenu';
 import NoteFooterMenu from '../components/NoteFooterMenu/NoteFooterMenu';
 
 const Note = (props) => {
-  const {noteId, note, setNote, setNoteId} = useNoteContext();
-  const {myId, newNote} = props;
+  const {note, setNote, setNoteId} = useNoteContext();
+  const { noteId, newNote} = props;
 
   localStorage.setItem("note", note);
   
@@ -20,7 +20,7 @@ const Note = (props) => {
 
   return (
     <div>
-      <NoteMenu myId={myId} newNote={newNote}/>
+      <NoteMenu   noteId={  noteId} newNote={newNote}/>
           <div className='note-div'>
       <div className='note-text-box'>
         <div className='note-input'>
