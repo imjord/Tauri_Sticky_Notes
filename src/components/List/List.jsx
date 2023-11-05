@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import "./List.css";
 import NoteCard from '../NoteCard/NoteCard';
 import noteImage from "../../assets/notes_plac.png";
@@ -6,16 +6,13 @@ import noteImage from "../../assets/notes_plac.png";
 import { useNoteContext } from '../../NoteContext';
 const List = (props) => {
 
+
+// if theres an error in getNotes in context then no notes will be true and display the image below
 const {noNotes} = useNoteContext()
+const { deleteNote} = props;
 
-  const { deleteNote} = props;
 
-
-  useEffect(() => {
-    console.log(noNotes)
-  })
-
-  return (
+return (
     <div className='list'>
       {noNotes ? 
           <div className='no-notes'>

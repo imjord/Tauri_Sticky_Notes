@@ -12,17 +12,18 @@ import { useNoteContext } from '../../NoteContext';
 const NoteCard = (props) => {
 
   const {note, notes, loading} = useNoteContext();
+  const {deleteNote} = props;
 
-  const [content, setContent] = useState("");
+
+  // change the epoch or whatever the hell rust time is used to a readable time 
   const getDateMade = (noteDate) => {
     const date = new Date(noteDate * 1000);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   }
 
-
+  // when you click on a card it opens the window of that specific card id
   const createWindow = async (windowId) => {
     try {
-
         const View = new WebviewWindow(`${windowId}`, {
           url: `/note/${windowId}`,
           height: 250,
@@ -45,36 +46,22 @@ const NoteCard = (props) => {
     }
   };
 
-
-    // // Function to handle deleting a note
-    // const handleDeleteNote = (e, noteId) => {
-    //   e.stopPropagation();
-    //   deleteNote(noteId);
-  
-    //   // Remove the note from local storage by its ID
-    //   const updatedNotes = notes.filter((myNote) => myNote._id?.$oid !== noteId);
-    //   localStorage.setItem('notes', JSON.stringify(updatedNotes));
-    // }
-
-  useEffect(() => {
-
-  }, [])
-
+  // delete notes need to add the dropdown still
+    const handleDeleteNote = (e, noteId) => {
+      e.stopPropagation();
+      deleteNote(noteId);
+    }
 
   return (
     <div className='card'>
       {loading ? <img id='loading' src={spinner} /> :
       <div>
-            {notes.map((myNote, index) => {
+            {notes.map((myNote) => {
         return (
-       
           <div
-
           onClick={() => createWindow(myNote?._id?.$oid)}
-
           key={myNote?._id?.$oid} 
-           className='card-wrapper' style={
-            
+           className='card-wrapper' style={   // styles from the color recieved from the note backend changes the style
             myNote.color === "Yellow"
               ? { borderTop: '2px solid rgb(255, 208, 0)'  }
               : myNote.color === "Blue"
@@ -95,7 +82,6 @@ const NoteCard = (props) => {
               : null
           }
           >
-          
             {getDateMade(myNote?.date?.secs_since_epoch)}</p>
           </div>
           <div className='card-content'>
@@ -107,9 +93,6 @@ const NoteCard = (props) => {
         </div>
    
       }
-       
-        
-  
 </div>
   )
 }

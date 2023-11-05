@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { emit, listen } from '@tauri-apps/api/event'
+
+
 const NoteContext = createContext();
 
 export function NoteProvider({ children }) {
@@ -15,6 +18,7 @@ export function NoteProvider({ children }) {
       const response = await axios.get("http://localhost:8080/notes");
       setNotes(response.data);
       setLoading(false);
+      console.log("GOT NOTES");
     } catch (err) {
       console.log(err);
       if(err.response.data === "no notes found"){

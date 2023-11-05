@@ -1,17 +1,19 @@
 import "./NoteMenu.css";
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark, faPlus,faGear, faEllipsis  } from '@fortawesome/free-solid-svg-icons'
-import { appWindow, getCurrent, WebviewWindow } from "@tauri-apps/api/window";
-import { useNoteContext } from '../../NoteContext';
+import { faXmark, faPlus, faEllipsis  } from '@fortawesome/free-solid-svg-icons'
+import { appWindow,  WebviewWindow } from "@tauri-apps/api/window";
+import { emit } from '@tauri-apps/api/event';
+
 
 const NoteMenu = (props) => {
   const { newNote} = props;
-  const {getNotes} = useNoteContext();
+
+  //  note has own create window cause the original stick notes does for whatever reason
   const createWindow = async () => {
     try {
       const noteId = await newNote();
-      if (noteId) {
+      // if (noteId) {
         const View = new WebviewWindow(`${noteId}`, {
           url: `/note/${noteId}`,
           height: 250,
@@ -24,22 +26,16 @@ const NoteMenu = (props) => {
           hiddenTitle: true,
         });
         View.once("tauri://created", function () {
-          console.log('ghergjvaePOOP')
-          getNotes();
+        emit("update_notes")  // emit to the main window that a new window (newNote) was created so update the list to show 
         });
         View.once("tauri://error", function (e) {
           console.log(e);
         });
-      } else {
-        console.log("Note ID is empty.");
-      }
     } catch (err) {
       console.log(err);
     }
   };
-  useEffect(()=> {
- 
-  })
+
     return (
       <div  className='note-menu'>
           <div data-tauri-drag-region className='note-menu-wrapper'>

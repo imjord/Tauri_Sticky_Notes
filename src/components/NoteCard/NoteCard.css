@@ -44,6 +44,8 @@
 
 
 #delete {
+    font-size: 25px;
     color: rgb(162, 160, 160);
     margin-right: 10px;
+    padding: 3px;
 }
