@@ -8,7 +8,8 @@ import Note from '../../pages/Note';
 import "./Menu.css";
 const Menu = (props) => {
 
-  const { newNote,getNotes, noteId} = props;
+  const { newNote } = props;
+  const { getNotes } = useNoteContext();
 
   const createWindow = async () => {
     try {

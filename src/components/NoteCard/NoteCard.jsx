@@ -6,10 +6,13 @@ import { faE, faEllipsis  } from '@fortawesome/free-solid-svg-icons'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { appWindow, getCurrent, WebviewWindow } from "@tauri-apps/api/window";
+import { useNoteContext } from '../../NoteContext';
 
 
 const NoteCard = (props) => {
-  const {notes, deleteNote, loading} = props;
+
+  const {note, notes, loading} = useNoteContext();
+
   const [content, setContent] = useState("");
   const getDateMade = (noteDate) => {
     const date = new Date(noteDate * 1000);
@@ -80,6 +83,9 @@ const NoteCard = (props) => {
               : null
           }>
           <div className='card-time'>
+          <FontAwesomeIcon onClick={(e) => {
+              handleDeleteNote(e, myNote?._id?.$oid)} 
+            } id='delete' icon={faEllipsis} />
            <p
            style={
             myNote.color === "Yellow"
@@ -89,9 +95,7 @@ const NoteCard = (props) => {
               : null
           }
           >
-            <FontAwesomeIcon onClick={(e) => {
-              handleDeleteNote(e, myNote?._id?.$oid)} 
-            } id='delete' icon={faEllipsis} />
+          
             {getDateMade(myNote?.date?.secs_since_epoch)}</p>
           </div>
           <div className='card-content'>

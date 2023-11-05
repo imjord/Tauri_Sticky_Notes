@@ -1,12 +1,31 @@
 import React, { createContext, useContext, useState } from 'react';
-
+import axios from 'axios';
 const NoteContext = createContext();
 
 export function NoteProvider({ children }) {
   const [note, setNote] = useState("");
+  const [localNote, setLocalNote] = useState("");
+  const [notes, setNotes] = useState([{}]);
+  const [loading, setLoading] = useState(false);
+  const [noNotes , setNoNotes] = useState(false);
+
+  const getNotes = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:8080/notes");
+      setNotes(response.data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      if(err.response.data === "no notes found"){
+        setNoNotes(true);
+        setLoading(false);
+      }
+    }
+  }
 
   return (
-    <NoteContext.Provider value={{ note, setNote}}>
+    <NoteContext.Provider value={{ note, setNote, getNotes, notes, loading, noNotes, setLocalNote, localNote}}>
       {children}
     </NoteContext.Provider>
   );

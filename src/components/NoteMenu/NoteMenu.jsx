@@ -1,13 +1,13 @@
 import "./NoteMenu.css";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faPlus,faGear, faEllipsis  } from '@fortawesome/free-solid-svg-icons'
 import { appWindow, getCurrent, WebviewWindow } from "@tauri-apps/api/window";
 import { useNoteContext } from '../../NoteContext';
 
 const NoteMenu = (props) => {
-  const { getNotes, noteId, newNote} = props;
-
+  const { newNote} = props;
+  const {getNotes} = useNoteContext();
   const createWindow = async () => {
     try {
       const noteId = await newNote();
@@ -37,8 +37,9 @@ const NoteMenu = (props) => {
       console.log(err);
     }
   };
-     
-    
+  useEffect(()=> {
+ 
+  })
     return (
       <div  className='note-menu'>
           <div data-tauri-drag-region className='note-menu-wrapper'>

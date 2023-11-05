@@ -5,16 +5,16 @@ import Search from "../components/Search/Search";
 import List from "../components/List/List";
 
 const Home = (props) => {
-  const {notes, deleteNote, getNotes,  noteId, loading, noNotes, newNote} = props;
+  const {deleteNote,  noteId, loading, noNotes, newNote} = props;
  
  
   return (
    <div>
-    <Menu   getNotes={getNotes} noteId={  noteId}   newNote={newNote} />
+    <Menu newNote={newNote} />
  <main>
     <Title />
     <Search />
-    <List deleteNote={deleteNote}   noNotes={noNotes} notes={notes} loading={loading} />
+    <List deleteNote={deleteNote}   />
     </main>
    </div>
    

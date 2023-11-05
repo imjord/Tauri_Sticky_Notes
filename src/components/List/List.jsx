@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./List.css";
 import NoteCard from '../NoteCard/NoteCard';
 import noteImage from "../../assets/notes_plac.png";
@@ -6,11 +6,14 @@ import noteImage from "../../assets/notes_plac.png";
 import { useNoteContext } from '../../NoteContext';
 const List = (props) => {
 
-  const {noteId,  note, setNote, setNoteId} = useNoteContext();
+const {noNotes} = useNoteContext()
 
-  const {notes, deleteNote, noNotes, loading} = props;
+  const { deleteNote} = props;
 
 
+  useEffect(() => {
+    console.log(noNotes)
+  })
 
   return (
     <div className='list'>
@@ -23,7 +26,7 @@ const List = (props) => {
             <p>Tap the new note button above to create a note</p>
             </div>
           </div> 
-        :   <NoteCard deleteNote={deleteNote} notes={notes} loading={loading} />
+        :   <NoteCard deleteNote={deleteNote}  />
   }
     </div>
   )

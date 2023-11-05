@@ -9,35 +9,16 @@ import Title from "./components/Title/Title";
 import Search from "./components/Search/Search";
 import List from "./components/List/List";
 import {Routes, Route} from "react-router-dom";
+import { useNoteContext } from "./NoteContext";
 import qs from 'qs';
+import axios from "axios";
 
 
 // pages
 import Note from "./pages/Note";
 import Home from "./pages/Home";
-import axios from "axios";
 function App() {
-  const [notes, setNotes] = useState([{}]);
-  const [loading, setLoading] = useState(false);
-  const [noNotes , setNoNotes] = useState(false);
-  const [  noteId, setNoteId] = useState(null); 
-
-  const getNotes = async () => {
-    
-    try {
-      setLoading(true);
-      const response = await axios.get("http://localhost:8080/notes");
-      setNotes(response.data);
-      console.log('WIHGWARHGAIWEUHGIAEHG')
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      if(err.response.data === "no notes found"){
-        setNoNotes(true);
-        setLoading(false);
-      }
-    }
-  }
+  const {getNotes} = useNoteContext();
 
 
   const newNote = async () => {
@@ -59,21 +40,7 @@ function App() {
     }
   }
 
-  // const  addNote  = async () =>  {
-  //   try {
-  //     const data = qs.stringify({
-  //       content: noteContent,
-  //     });
-  //     const response = await axios.post("http://localhost:8080/notes", data, {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //     });
 
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
   
 
   const deleteNote = async (id) => {
@@ -95,8 +62,8 @@ function App() {
     <div className="app">
    
     <Routes>
-      <Route path="/" element={<Home deleteNote={deleteNote} getNotes={getNotes}   noteId={  noteId}   newNote={newNote} noNotes={noNotes} notes={notes} loading={loading}/>}/>
-      <Route path="/note/:id" element={<Note  getNotes={getNotes}   noteId={  noteId} newNote={newNote}   />}/>
+      <Route path="/" element={<Home deleteNote={deleteNote}  newNote={newNote}  />}/>
+      <Route path="/note/:id" element={<Note newNote={newNote}   />}/>
     </Routes>
     </div>
   );

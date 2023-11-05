@@ -24,6 +24,7 @@
 .card-time {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     width: 100%;
 }
 
@@ -43,6 +44,6 @@
 
 
 #delete {
-    font-size: 30px;
+    color: rgb(162, 160, 160);
     margin-right: 10px;
 }
