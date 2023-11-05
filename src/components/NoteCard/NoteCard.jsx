@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { appWindow, getCurrent, WebviewWindow } from "@tauri-apps/api/window";
 import { useNoteContext } from '../../NoteContext';
+import { invoke } from "@tauri-apps/api";
 
 
 const NoteCard = (props) => {
@@ -37,6 +38,7 @@ const NoteCard = (props) => {
         });
   
         View.once("tauri://created", function () {
+          invoke("set_note_shadow", {label: View.label});
         });
         View.once("tauri://error", function (e) {
           console.log(e);

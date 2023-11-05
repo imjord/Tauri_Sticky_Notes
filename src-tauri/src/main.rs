@@ -2,21 +2,19 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 
-use tauri::Manager;
+use tauri::{Runtime, Manager, AppHandle};
 use window_shadows::set_shadow;
 
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+
+
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+fn set_note_shadow<R: Runtime>(app: AppHandle<R>, label: &str) {
+	let window = app.get_window(label).unwrap();
+	#[cfg(any(windows, target_os = "macos"))]
+	set_shadow(&window, true).unwrap();
 }
 
-
-// #[tauri::command]
-// fn get_windows(window: tauri::Window) ->String  {
-//     format!("Window {}", window.label())
-// }
 
 
 fn main() {
@@ -26,7 +24,7 @@ fn main() {
             set_shadow(&window, true).expect("Unsupported platform!");
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![set_note_shadow])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

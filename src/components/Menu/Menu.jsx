@@ -4,6 +4,8 @@ import { faXmark, faPlus,faGear  } from '@fortawesome/free-solid-svg-icons'
 import { appWindow, WebviewWindow } from "@tauri-apps/api/window";
 import { useNoteContext } from '../../NoteContext';
 import "./Menu.css";
+import { invoke } from "@tauri-apps/api";
+
 const Menu = (props) => {
 
   const { newNote } = props;
@@ -27,6 +29,7 @@ const Menu = (props) => {
         });
         View.once("tauri://created", function () {
           getNotes(); // dont have to emit because this happens in the main window i believe 
+          invoke("set_note_shadow", {label: View.label}); // shadow for the created winow
          });
         View.once("tauri://error", function (e) {
           console.log(e);
