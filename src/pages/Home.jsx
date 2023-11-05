@@ -6,8 +6,7 @@ import List from "../components/List/List";
 
 const Home = (props) => {
   const {deleteNote, newNote} = props;
- 
- 
+
   return (
    <div>
     <Menu newNote={newNote} />
