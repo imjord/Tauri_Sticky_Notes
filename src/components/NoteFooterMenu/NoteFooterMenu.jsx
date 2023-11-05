@@ -77,6 +77,6 @@ const NoteFooterMenu = () => {
       </div>
       </footer>
   )
-}
+};
 
 export default NoteFooterMenu
