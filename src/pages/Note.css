@@ -1,5 +1,11 @@
 
+.note-page {
+    font-family: 'Roboto', sans-serif;
+}
 
+textarea {
+    font-family: 'Roboto', sans-serif;
+}
 
 .note-input {
     display: flex;
@@ -20,7 +26,7 @@
     white-space: pre-wrap; /* Allow text to wrap to the next line */
     overflow-wrap: break-word; /* Break long words when necessary */
     resize: none;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 textarea::placeholder {

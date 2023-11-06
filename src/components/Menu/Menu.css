@@ -8,7 +8,6 @@
     color: gray;
     z-index: 9999;
     background-color: rgb(33, 32, 32);
-
 }
 
 .menu-wrapper {
@@ -25,6 +24,7 @@
     justify-content: space-between;
     height: 100%;
     width: 18%;
+    font-size: 20px;
 }
 
 .add-note-plus div {
@@ -33,12 +33,13 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    padding: 6px;
+    padding: 7.5px;
 
 }
 
 .add-note-plus div:hover {
-    background-color: rgb(85, 84, 84);
+     filter: brightness(0.8);
+    background-color: rgba(196, 187, 187, 0.1);
 }
 
 
@@ -55,7 +56,8 @@
 
 
 .menu-right div:nth-child(1):hover {
-    background-color: rgb(85, 84, 84);
+     filter: brightness(0.8);
+    background-color: rgba(196, 187, 187, 0.1);
 }
 
 
@@ -65,7 +67,8 @@
 }
 
 .menu-right div:nth-child(2):hover {
-    background-color: rgb(85, 84, 84);
+     filter: brightness(0.8);
+    background-color: rgba(196, 187, 187, 0.1);
 
 }
 

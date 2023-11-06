@@ -12,7 +12,8 @@ import { invoke } from "@tauri-apps/api";
 
 const NoteCard = (props) => {
 
-  const {note, notes, loading} = useNoteContext();
+  const {note, notes, loading } = useNoteContext();
+
   const {deleteNote} = props;
 
 
@@ -63,14 +64,25 @@ const NoteCard = (props) => {
           <div
           onClick={() => createWindow(myNote?._id?.$oid)}
           key={myNote?._id?.$oid} 
-           className='card-wrapper' style={   // styles from the color recieved from the note backend changes the style
+           className='card-wrapper' style={  
             myNote.color === "Yellow"
-              ? { borderTop: '2px solid rgb(255, 208, 0)'  }
-              : myNote.color === "Blue"
-              ? { borderTop: '2px solid #aed7f9'   
-            }
-              : null
-          }>
+            ? { borderTop: '2px solid rgb(255, 208, 0)' }
+            : myNote.color === "Blue"
+            ? { borderTop: '2px solid #aed7f9' }
+            : myNote.color === "Green"
+            ? { borderTop: '2px solid green' }
+            : myNote.color === "Pink"
+            ? { borderTop: '2px solid pink' }
+            : myNote.color === "Purple"
+            ? { borderTop: '2px solid purple' }
+            : myNote.color === "Gray"
+            ? { borderTop: '2px solid gray' }
+            : myNote.color === "Black"
+            ? { borderTop: '2px solid black' }
+            : null
+
+
+            }>
           <div className='card-time'>
           <FontAwesomeIcon onClick={(e) => {
               handleDeleteNote(e, myNote?._id?.$oid)} 
@@ -78,10 +90,20 @@ const NoteCard = (props) => {
            <p
            style={
             myNote.color === "Yellow"
-              ? { color: 'rgb(255, 208, 0)' }
-              : myNote.color === "Blue"
-              ? { color: '#aed7f9' }
-              : null
+            ? { color: 'rgb(255, 208, 0)' }
+            : myNote.color === "Blue"
+            ? { color: '#aed7f9' }
+            : myNote.color === "Green"
+            ? { color: 'green' }
+            : myNote.color === "Pink"
+            ? { color: 'pink' }
+            : myNote.color === "Purple"
+            ? { color: 'purple' }
+            : myNote.color === "Gray"
+            ? { color: 'gray' }
+            : myNote.color === "Black"
+            ? { color: 'black' }
+            : null
           }
           >
             {getDateMade(myNote?.date?.secs_since_epoch)}</p>

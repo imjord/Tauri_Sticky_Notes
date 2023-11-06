@@ -11,6 +11,7 @@ export function NoteProvider({ children }) {
   const [notes, setNotes] = useState([{}]);
   const [loading, setLoading] = useState(false);
   const [noNotes , setNoNotes] = useState(false);
+  const [noteColor, setNoteColor] = useState("Yellow");
 
   const getNotes = async () => {
     try {
@@ -29,7 +30,7 @@ export function NoteProvider({ children }) {
   }
 
   return (
-    <NoteContext.Provider value={{ note, setNote, getNotes, notes, loading, noNotes, setLocalNote, localNote}}>
+    <NoteContext.Provider value={{ note, setNote, getNotes, notes, loading, noNotes, setLocalNote, localNote, setNoteColor, noteColor}}>
       {children}
     </NoteContext.Provider>
   );

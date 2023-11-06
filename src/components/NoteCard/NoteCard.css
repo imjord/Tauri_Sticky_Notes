@@ -3,6 +3,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    font-family: 'Roboto', sans-serif;
 }
 
 .card-wrapper {
@@ -37,9 +38,14 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 30px;
+    padding: 1px;
+    margin-left: 10px;
     font-size: 14px;
     color: white;
+    white-space: nowrap;      
+    overflow: hidden;         
+    text-overflow: ellipsis; 
+    
 }
 
 

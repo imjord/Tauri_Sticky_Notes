@@ -9,19 +9,57 @@ import qs from 'qs';
 import { emit } from '@tauri-apps/api/event';
 
 const Note = (props) => {
-  const {setNote, note} = useNoteContext();
+  const {setNote, note, noteColor, setNoteColor} = useNoteContext();
+  
   const {newNote} = props;
   const [currentNote, setCurrentNote] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [id, setId] = useState("");
   const typingTimeout = useRef(null); 
   let location = useLocation();
-// note window thats created
+
+
+
+
+
+  
+
+const getColor = (color) => {
+  switch (color) {
+    case "Blue":
+      setNoteColor("Blue");
+      break;
+    case "Yellow":
+      setNoteColor("Yellow");
+      break;
+    case "Green":
+      setNoteColor("Green");
+    break;
+    case "Pink":
+      setNoteColor("Pink");
+    break;
+    case "Purple":
+      setNoteColor("Purple");
+    break;
+    case "Gray":
+      setNoteColor("Gray");
+    break;
+    case "Black":
+      setNoteColor("Black");
+    break;
+    default:
+      setNoteColor("Yellow");
+      break;
+  } 
+}
+
+
 const getNoteContent = async (id) => {
     try {
       const response = await axios.get(`http://localhost:8080/notes/${id}`);
-      console.log(response.data.content);
+      console.log(response.data);
       setCurrentNote(response.data.content);
+      getColor(response.data.color);
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +116,10 @@ const addNote = async (id) => {
 
 
 
-
+  useEffect(() => {
+    // This effect will run whenever noteColor changes
+    console.log(noteColor);
+  }, [noteColor]);
 
 
 
@@ -89,8 +130,8 @@ useEffect(() => {
 }, [])
 
   return (
-    <div>
-      <NoteMenu  newNote={newNote}/>
+    <div className='note-page'>
+      <NoteMenu  id={id} noteColor={noteColor}  newNote={newNote}/>
           <div className='note-div'>
       <div className='note-text-box'>
         <div className='note-input'>

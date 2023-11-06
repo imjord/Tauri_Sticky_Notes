@@ -1,5 +1,6 @@
 .search {
     width: 100%;
+    
 
 }
 
@@ -20,6 +21,7 @@
 .search input {
     width: 100%;
     padding: 7px;
+    font-family: 'Roboto', sans-serif;
     background-color: rgb(61, 60, 60);
     border: 0;
     outline: 0;
