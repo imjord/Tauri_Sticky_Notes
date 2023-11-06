@@ -4,12 +4,16 @@
     width: 100%;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+    cursor: default;
+
 }
 
 .card-wrapper {
     margin-top: 8px;
     border-radius: 3px;
     background-color: rgb(61, 60, 60);
+    transition: background-color 0.3s; /* Add a transition effect */
+    position: relative;
 }
 
 
@@ -22,16 +26,52 @@
 
 }
 
+.card-wrapper:hover {
+    background-color: rgb(90, 89, 89); /* Change background color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+
+    /* Add styles for the ellipsis icon */
+    .fae {
+        opacity: 1;
+    }
+}
+
+
+
 .card-time {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
+    position: relative;
 }
 
 .card-time p {
     padding-right: 10px;
     font-size: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+     text-overflow: ellipsis;
+    transition: opacity 0.3s;
+}
+
+.card-wrapper:hover #time {
+    opacity: 0; /* Hide the time on the hovered card only */
+}
+
+.card-time .fae {
+    font-size: 25px;
+    color: rgb(162, 160, 160);
+    opacity: 0; 
+    transition: opacity 0.3s; 
+    position: absolute;
+}
+
+
+
+.fae {
+    padding-bottom: 10px;
+    z-index: 999999;
 }
 
 .card-content {
@@ -54,4 +94,37 @@
     color: rgb(162, 160, 160);
     margin-right: 10px;
     padding: 3px;
+}
+
+
+.note-dropdown-list {
+    position: absolute;
+    top: 30px;
+    width: 100px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    display: none; /* Hide the dropdown by default */
+
+}
+.card-wrapper:hover .note-dropdown-list {
+    display: block;
+}
+
+.note-dropdown-list div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(94, 87, 87);
+    color: whitesmoke;
+}
+
+.note-dropdown-list div p {
+   font-size: 12px;
+}
+
+
+
+.note-dropdown-list div:hover {
+  background-color: gray;
 }

@@ -108,7 +108,7 @@ const addNote = async (id) => {
       setIsTyping(false);
 
       addNote(id)
-    }, 2500); // Adjust the delay as needed
+    }, 3500); // Adjust the delay as needed
     // Indicate that the user is typing
     setIsTyping(true);
   };
