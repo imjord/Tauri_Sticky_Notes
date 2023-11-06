@@ -99,18 +99,19 @@ const addNote = async (id) => {
 
 
   // Handle text area changes and typing detection 
-   const handleTextareaChange = (e) => {
+   const handleTextareaChange = async (e) => {
           setNote(e.target.value);
-        // Clear the previous timeout
-        clearTimeout(typingTimeout.current);
-      // Set a new timeout to determine if typing has stopped
-    typingTimeout.current = setTimeout(() => {
-      setIsTyping(false);
+    //       console.log(note);
+    //     // Clear the previous timeout
+    //     clearTimeout(typingTimeout.current);
+    //   // Set a new timeout to determine if typing has stopped
+    // typingTimeout.current = setTimeout(() => {
+    //   setIsTyping(false);
 
-      addNote(id)
-    }, 3500); // Adjust the delay as needed
-    // Indicate that the user is typing
-    setIsTyping(true);
+    //   addNote(id)
+    // }, 3500); // Adjust the delay as needed
+    // // Indicate that the user is typing
+    // setIsTyping(true);
   };
 
 
@@ -120,7 +121,18 @@ const addNote = async (id) => {
   //   // This effect will run whenever noteColor changes
   //   console.log(noteColor);
   // }, [noteColor]);
-
+  useEffect(() => {
+    console.log(note);
+    // Clear the previous timeout
+    clearTimeout(typingTimeout.current);
+    // Set a new timeout to determine if typing has stopped
+    typingTimeout.current = setTimeout(() => {
+      setIsTyping(false);
+      addNote(id);
+    }, 3500); // Adjust the delay as needed
+    // Indicate that the user is typing
+    setIsTyping(true);
+  }, [note]);
 
 
 // get the path on note created so add to id state
