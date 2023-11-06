@@ -12,7 +12,7 @@ import { invoke } from "@tauri-apps/api";
 
 const NoteCard = (props) => {
 
-  const {note, notes, loading } = useNoteContext();
+  const {note, gotSearch, notes, loading } = useNoteContext();
 
   const {deleteNote} = props;
   const [dropDown, setDropDown] = useState(false);
@@ -109,91 +109,98 @@ const NoteCard = (props) => {
     };
 
 
+useEffect(() => {
 
+}, [gotSearch])
 
   return (
     <div className='card'>
       {loading ? <img id='loading' src={spinner} /> :
-      <div>
-            {notes.map((myNote, index) => {
-        return (
-          <div
-          onDoubleClick={() => createWindow(myNote?._id?.$oid)}
-          key={myNote?._id?.$oid} 
-          onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
-           className='card-wrapper' style={  
-            myNote.color === "Yellow"
-            ? { borderTop: '2px solid rgb(255, 208, 0)' }
-            : myNote.color === "Blue"
-            ? { borderTop: '2px solid #aed7f9' }
-            : myNote.color === "Green"
-            ? { borderTop: '2px solid green' }
-            : myNote.color === "Pink"
-            ? { borderTop: '2px solid pink' }
-            : myNote.color === "Purple"
-            ? { borderTop: '2px solid purple' }
-            : myNote.color === "Gray"
-            ? { borderTop: '2px solid gray' }
-            : myNote.color === "Black"
-            ? { borderTop: '2px solid black' }
-            : null
-
-
-            }>
-          <div className='card-time'>
-          <FontAwesomeIcon 
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDropDown(e, index);
-          }}
-          
-          className='fae' 
-           
-            id='delete' 
-            icon={faEllipsis} />
-
-           <p id='time'
-           style={
-            myNote.color === "Yellow"
-            ? { color: 'rgb(255, 208, 0)' }
-            : myNote.color === "Blue"
-            ? { color: '#aed7f9' }
-            : myNote.color === "Green"
-            ? { color: 'green' }
-            : myNote.color === "Pink"
-            ? { color: 'pink' }
-            : myNote.color === "Purple"
-            ? { color: 'purple' }
-            : myNote.color === "Gray"
-            ? { color: 'gray' }
-            : myNote.color === "Black"
-            ? { color: 'black' }
-            : null
-          }
-          >
-            {getDateMade(myNote?.date?.secs_since_epoch)}</p>
-            {hoveredCardIndex === index && dropDowns[index] ? (
-              <div className='note-dropdown-list'>
-                <div onClick={() => createWindow(myNote?._id?.$oid)}> 
-                    <FontAwesomeIcon icon={faFolderOpen} />
-                    <p>Edit Note</p>
-                   </div>
-                <div onClick={(e) => handleDeleteNote(e, myNote?._id?.$oid)}> <FontAwesomeIcon icon={faTrashCan} />
-                  <p>Delete Note</p>
-                 </div>
-                </div>
-            ) : null}
-          </div>
-          <div className='card-content'>
-              <p>{myNote.content}</p>
-          </div>
-          </div>
-        )
-      })}
+      gotSearch?.data?.content ? (
+        <div>
+        <p>{gotSearch?.data?.content}</p>
         </div>
+      ) :  <div>
+      {notes.map((myNote, index) => {
+  return (
+    <div
+    onDoubleClick={() => createWindow(myNote?._id?.$oid)}
+    key={myNote?._id?.$oid} 
+    onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={handleMouseLeave}
+     className='card-wrapper' style={  
+      myNote.color === "Yellow"
+      ? { borderTop: '2px solid rgb(255, 208, 0)' }
+      : myNote.color === "Blue"
+      ? { borderTop: '2px solid #aed7f9' }
+      : myNote.color === "Green"
+      ? { borderTop: '2px solid green' }
+      : myNote.color === "Pink"
+      ? { borderTop: '2px solid pink' }
+      : myNote.color === "Purple"
+      ? { borderTop: '2px solid purple' }
+      : myNote.color === "Gray"
+      ? { borderTop: '2px solid gray' }
+      : myNote.color === "Black"
+      ? { borderTop: '2px solid black' }
+      : null
+
+
+      }>
+    <div className='card-time'>
+    <FontAwesomeIcon 
+    onClick={(e) => {
+      e.stopPropagation();
+      handleDropDown(e, index);
+    }}
+    
+    className='fae' 
+     
+      id='delete' 
+      icon={faEllipsis} />
+
+     <p id='time'
+     style={
+      myNote.color === "Yellow"
+      ? { color: 'rgb(255, 208, 0)' }
+      : myNote.color === "Blue"
+      ? { color: '#aed7f9' }
+      : myNote.color === "Green"
+      ? { color: 'green' }
+      : myNote.color === "Pink"
+      ? { color: 'pink' }
+      : myNote.color === "Purple"
+      ? { color: 'purple' }
+      : myNote.color === "Gray"
+      ? { color: 'gray' }
+      : myNote.color === "Black"
+      ? { color: 'black' }
+      : null
+    }
+    >
+      {getDateMade(myNote?.date?.secs_since_epoch)}</p>
+      {hoveredCardIndex === index && dropDowns[index] ? (
+        <div className='note-dropdown-list'>
+          <div onClick={() => createWindow(myNote?._id?.$oid)}> 
+              <FontAwesomeIcon icon={faFolderOpen} />
+              <p>Edit Note</p>
+             </div>
+          <div onClick={(e) => handleDeleteNote(e, myNote?._id?.$oid)}> <FontAwesomeIcon icon={faTrashCan} />
+            <p>Delete Note</p>
+           </div>
+          </div>
+      ) : null}
+    </div>
+    <div className='card-content'>
+        <p>{myNote.content}</p>
+    </div>
+    </div>
+  )
+})}
+  </div>}
+     
    
-      }
+      
 </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { emit, listen } from '@tauri-apps/api/event'
 
@@ -12,6 +12,13 @@ export function NoteProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [noNotes , setNoNotes] = useState(false);
   const [noteColor, setNoteColor] = useState("Yellow");
+  const [isSearching, setIsSearching] = useState(false);
+  const [gotSearch, setGotSearch] = useState({});
+  const [searchError, setSearchError] = useState("");
+
+
+  
+
 
   const getNotes = async () => {
     try {
@@ -29,8 +36,10 @@ export function NoteProvider({ children }) {
     }
   }
 
+
+
   return (
-    <NoteContext.Provider value={{ note, setNoNotes, setNote, getNotes, notes, loading, noNotes, setLocalNote, localNote, setNoteColor, noteColor}}>
+    <NoteContext.Provider value={{ note,setGotSearch, setSearchError, gotSearch, searchError, setNoNotes, setNote,isSearching, setIsSearching, getNotes, notes, loading, noNotes, setLocalNote, localNote, setNoteColor, noteColor}}>
       {children}
     </NoteContext.Provider>
   );
