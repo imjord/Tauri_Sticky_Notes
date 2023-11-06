@@ -15,22 +15,22 @@ export function NoteProvider({ children }) {
 
   const getNotes = async () => {
     try {
-      setLoading(true);
+      // setLoading(true);
       const response = await axios.get("http://localhost:8080/notes");
       setNotes(response.data);
-      setLoading(false);
+      // setLoading(false);
       console.log("GOT NOTES");
     } catch (err) {
       console.log(err);
       if(err.response.data === "no notes found"){
         setNoNotes(true);
-        setLoading(false);
+        // setLoading(false);
       }
     }
   }
 
   return (
-    <NoteContext.Provider value={{ note, setNote, getNotes, notes, loading, noNotes, setLocalNote, localNote, setNoteColor, noteColor}}>
+    <NoteContext.Provider value={{ note, setNoNotes, setNote, getNotes, notes, loading, noNotes, setLocalNote, localNote, setNoteColor, noteColor}}>
       {children}
     </NoteContext.Provider>
   );

@@ -4,13 +4,23 @@ import NoteCard from '../NoteCard/NoteCard';
 import noteImage from "../../assets/notes_plac.png";
 
 import { useNoteContext } from '../../NoteContext';
+import { listen } from '@tauri-apps/api/event';
+
 const List = (props) => {
 
 
 // if theres an error in getNotes in context then no notes will be true and display the image below
-const {noNotes} = useNoteContext()
+const {noNotes, getNotes, setNoNotes} = useNoteContext()
 const { deleteNote} = props;
 
+
+useEffect(() => {
+  const unlisten = listen('update_notes', () => {
+    setNoNotes(false);
+  });
+
+
+}, []);
 
 return (
     <div className='list'>

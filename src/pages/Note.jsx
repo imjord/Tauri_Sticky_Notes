@@ -9,7 +9,7 @@ import qs from 'qs';
 import { emit } from '@tauri-apps/api/event';
 
 const Note = (props) => {
-  const {setNote, note, noteColor, setNoteColor} = useNoteContext();
+  const {setNote, note, noteColor, setNoteColor, setNoNotes, noNotes} = useNoteContext();
   
   const {newNote} = props;
   const [currentNote, setCurrentNote] = useState("");
@@ -116,18 +116,21 @@ const addNote = async (id) => {
 
 
 
-  useEffect(() => {
-    // This effect will run whenever noteColor changes
-    console.log(noteColor);
-  }, [noteColor]);
+  // useEffect(() => {
+  //   // This effect will run whenever noteColor changes
+  //   console.log(noteColor);
+  // }, [noteColor]);
 
 
 
 // get the path on note created so add to id state
 useEffect(() => {
   getPath();
+  setNoNotes(false);
+  console.log(noNotes)
+  emit('update_notes');
 
-}, [])
+}, [noteColor])
 
   return (
     <div className='note-page'>
