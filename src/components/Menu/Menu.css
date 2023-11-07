@@ -42,6 +42,12 @@
     background-color: rgba(196, 187, 187, 0.1);
 }
 
+.settings-p {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 60px;
+}
 
 
 #plus-icon {

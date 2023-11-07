@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark, faPlus,faGear  } from '@fortawesome/free-solid-svg-icons'
+import { faXmark, faPlus,faGear, faAngleLeft  } from '@fortawesome/free-solid-svg-icons'
 import { appWindow, WebviewWindow } from "@tauri-apps/api/window";
 import { useNoteContext } from '../../NoteContext';
 import "./Menu.css";
@@ -8,7 +8,7 @@ import { invoke } from "@tauri-apps/api";
 
 const Menu = (props) => {
 
-  const { newNote } = props;
+  const { newNote, settingsView, setSettingsView, changeView } = props;
   const { getNotes } = useNoteContext();
 
 
@@ -43,21 +43,38 @@ const Menu = (props) => {
   // menu to create new notes and close main window
   return (
     <div  className='menu'>
-        <div data-tauri-drag-region className='menu-wrapper'>
-        <div className='add-note-plus' onClick={createWindow} title='New note'>
+        
+          {settingsView ? <div data-tauri-drag-region className='menu-wrapper'>
+            <div className='add-note-plus' onClick={changeView} title='New note'>
+            <div>
+            <FontAwesomeIcon  id='plus-icon' icon={faAngleLeft}  />
+             </div>
+        </div>
+        <p className='settings-p'>Settings</p>
+        <div className='menu-right'>
+           <div></div>
+            <div title='Close window'>
+            <FontAwesomeIcon id='close' icon={faXmark} onClick={() => appWindow.close()} />
+            </div>
+        </div> 
+            
+             </div> : <div data-tauri-drag-region className='menu-wrapper'>
+             <div className='add-note-plus' onClick={createWindow} title='New note'>
             <div>
             <FontAwesomeIcon  id='plus-icon' icon={faPlus}  />
                 </div>
         </div>
         <div className='menu-right'>
             <div title='Settings'>
-            <FontAwesomeIcon id='setting-icon' icon={faGear} />
+            <FontAwesomeIcon onClick={changeView} id='setting-icon' icon={faGear} />
             </div>
             <div title='Close window'>
             <FontAwesomeIcon id='close' icon={faXmark} onClick={() => appWindow.close()} />
             </div>
         </div>
-        </div>
+              
+              </div>}
+     
         
     </div>
   )
