@@ -68,7 +68,10 @@ const NoteCard = (props) => {
 
   const closeWindow = (id) => {
     const noteWindow = WebviewWindow.getByLabel(`${id}`);
-    noteWindow.close();
+
+    if(noteWindow) {
+      noteWindow.close();
+    };
   };
 
   // delete notes need to add the dropdown still
