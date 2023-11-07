@@ -123,9 +123,52 @@ useEffect(() => {
     <div className='card'>
       {loading ? <img id='loading' src={spinner} /> :
       gotSearch?.data?.content ? (
-        <div>
-        <p>{gotSearch?.data?.content}</p>
+        <div
+  onDoubleClick={() => createWindow(gotSearch?.data?._id?.$oid)}
+  key={gotSearch?.data?._id?.$oid}
+  onMouseEnter={() => handleMouseEnter()}
+  onMouseLeave={handleMouseLeave}
+  className='card-wrapper'
+  style={
+    gotSearch?.data?.color
+      ? { borderTop: `2px solid ${gotSearch?.data.color}` }
+      : null
+  }
+>
+  <div className='card-time'>
+    <FontAwesomeIcon
+      onClick={(e) => {
+        e.stopPropagation();
+        handleDropDown(e);
+      }}
+      className='fae'
+      id='delete'
+      icon={faEllipsis}
+    />
+
+    <p
+      id='time'
+      style={gotSearch?.data?.color ? { color: gotSearch?.data.color } : null}
+    >
+      {getDateMade(gotSearch?.data?.date?.secs_since_epoch)}
+    </p>
+    {hoveredCardIndex && dropDowns[0] ? (
+      <div className='note-dropdown-list'>
+        <div onClick={() => createWindow(gotSearch?.data?._id?.$oid)}>
+          <FontAwesomeIcon icon={faFolderOpen} />
+          <p>Edit Note</p>
         </div>
+        <div onClick={(e) => handleDeleteNote(e, gotSearch?.data?._id?.$oid)}>
+          <FontAwesomeIcon icon={faTrashCan} />
+          <p>Delete Note</p>
+        </div>
+      </div>
+    ) : null}
+  </div>
+  <div className='card-content'>
+    <p>{gotSearch?.data.content}</p>
+  </div>
+</div>
       ) :  <div>
       {notes.map((myNote, index) => {
   return (

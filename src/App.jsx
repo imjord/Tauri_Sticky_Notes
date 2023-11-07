@@ -51,6 +51,21 @@ function App() {
   };
  
 
+  // prevent right click
+  useEffect(() => {
+    const preventContextMenu = (event) => {
+      event.preventDefault();
+    };
+
+    document.addEventListener('contextmenu', preventContextMenu);
+
+    return () => {
+      // Clean up the event listener when the component unmounts
+      document.removeEventListener('contextmenu', preventContextMenu);
+    };
+  }, []);
+
+
   /* when app is intialized get the notes from api and the getNotes will populate the list. also have a listen 
   for an event inside the NOTE WINDOWS cause cant call functions accross windows so need an event to listen for an emit then call the getnotes function to update the list */
 
