@@ -65,7 +65,7 @@ MongoDB
 
 ## Contributing
 
-i welcome contributions from the community. If you'd like to enhance this Sticky Notes application, please follow these steps:
+I welcome contributions from the community. If you'd like to enhance this Sticky Notes application, please follow these steps:
 
 1. Fork the repository to your GitHub account.
 2. Create a new branch for your feature or bug fix.
